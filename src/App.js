@@ -30,8 +30,8 @@ function App() {
         <main>
         <Switch>
           <Route exact path="/"
-            render={() => {
-              return <ProductsList products={products} deleteProduct={deleteProduct} />
+            render={({history}) => {
+              return <ProductsList products={products} deleteProduct={deleteProduct} history={history}/>
             }}
           />
           <Route

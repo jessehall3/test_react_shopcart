@@ -6,15 +6,19 @@ function ProductsList(props) {
     e.stopPropagation()
   }
 
+  const handleSelectProduct = (slug) => {
+    props.history.push('/product/' + slug)
+  }
+
   const productsList = (products) => {
     return products.map((value, index) => {
       return (
-        <div key={index}>
-        <img src={value.image} />
-        <h2>{value.name}</h2>
-        <p className="description">{value.description}</p>
-        <p className="price">${value.price}</p>
-        <button onClick={ (e) => handleDelete(e, index) }>ⓧ</button>
+        <div key={index} onClick={ () => handleSelectProduct(value.slug) }>
+          <img src={value.image} />
+          <h2>{value.name}</h2>
+          <p className="description">{value.description}</p>
+          <p className="price">${value.price}</p>
+          <button onClick={ (e) => handleDelete(e, index) }>ⓧ</button>
         </div>
       )
     })
