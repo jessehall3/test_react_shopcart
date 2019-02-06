@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import AddProduct from './components/AddProduct.js'
 import ProductsList from './components/ProductsList.js'
 import SingleProduct from './components/SingleProduct.js'
+import NotFoundPage from './components/NotFoundPage.js'
 import './App.css';
 
 function App() {
@@ -15,12 +16,12 @@ function App() {
         </aside>
 
         <main>
+        <Switch>
           <Route exact path="/" component={ProductsList} />
-          <Route
-            path="/add-product"
-            component={AddProduct}
-          />
+          <Route path="/add-product" component={AddProduct} />
           <Route path="/product/:slug" component={SingleProduct} />
+          <Route component={NotFoundPage} />
+        </Switch>
         </main>
       </div>
     </Router>
