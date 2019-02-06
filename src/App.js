@@ -26,7 +26,9 @@ function App() {
           <Route exact path="/" component={ProductsList} />
           <Route
             path="/add-product"
-            render={() => <AddProduct addProduct={addProduct} />}
+            render={({history}) => {
+                return <AddProduct addProduct={addProduct} history={history} />
+              }}
           />
           <Route path="/product/:slug" component={SingleProduct} />
           <Route component={NotFoundPage} />

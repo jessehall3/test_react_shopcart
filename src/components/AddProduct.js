@@ -51,7 +51,7 @@ function AddProduct(props) {
   const addProduct = e => {
     e.preventDefault()
     props.addProduct({ name, price, description, image, slug: slugify(name) })
-    console.log({ name, price, description, image, slug: slugify(name) });
+    props.history.push('/')
   }
 
   return (
