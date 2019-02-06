@@ -23,7 +23,11 @@ function App() {
 
         <main>
         <Switch>
-          <Route exact path="/" component={ProductsList} />
+          <Route exact path="/"
+            render={() => {
+              return <ProductsList products={products} />
+            }}
+          />
           <Route
             path="/add-product"
             render={({history}) => {
