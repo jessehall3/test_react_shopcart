@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import AddProduct from './components/AddProduct.js'
 import ProductsList from './components/ProductsList.js'
@@ -7,6 +7,12 @@ import NotFoundPage from './components/NotFoundPage.js'
 import './App.css';
 
 function App() {
+  const [products, setProducts] = useState([])
+
+  const addProduct = product => {
+    setProducts([...products, product])
+  }
+
   return (
     <Router>
       <div id="app">
@@ -18,7 +24,10 @@ function App() {
         <main>
         <Switch>
           <Route exact path="/" component={ProductsList} />
-          <Route path="/add-product" component={AddProduct} />
+          <Route
+            path="/add-product"
+            render={() => <AddProduct addProduct={addProduct} />}
+          />
           <Route path="/product/:slug" component={SingleProduct} />
           <Route component={NotFoundPage} />
         </Switch>
