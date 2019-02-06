@@ -13,6 +13,12 @@ function App() {
     setProducts([...products, product])
   }
 
+  const deleteProduct = index => {
+    const updatedProducts = [...products]
+    updatedProducts.splice(index, 1)
+    setProducts(updatedProducts)
+  }
+
   return (
     <Router>
       <div id="app">
@@ -25,7 +31,7 @@ function App() {
         <Switch>
           <Route exact path="/"
             render={() => {
-              return <ProductsList products={products} />
+              return <ProductsList products={products} deleteProduct={deleteProduct} />
             }}
           />
           <Route

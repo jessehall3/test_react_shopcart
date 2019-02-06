@@ -1,6 +1,11 @@
 import React from 'react';
 
 function ProductsList(props) {
+  const handleDelete = (e, index) => {
+    props.deleteProduct(index)
+    e.stopPropagation()
+  }
+
   const productsList = (products) => {
     return products.map((value, index) => {
       return (
@@ -9,6 +14,7 @@ function ProductsList(props) {
         <h2>{value.name}</h2>
         <p className="description">{value.description}</p>
         <p className="price">${value.price}</p>
+        <button onClick={ (e) => handleDelete(e, index) }>ⓧ</button>
         </div>
       )
     })
