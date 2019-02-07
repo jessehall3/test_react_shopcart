@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function SingleProduct(props) {
+  const [quantity, setQuantity] = useState(1)
+
   const addToCart = () => {
-    props.addToCart({ product: props.product, quantity: 1 })
+    props.addToCart({ product: props.product, quantity})
+  }
+
+  const handleChangeQuantity = e => {
+    const newValue = parseInt(e.target.value)
+    setQuantity(newValue)
   }
 
   const quantitySelect = (len=20) => {
     const numArray =  Array.from({length: len}, (x,i) => i + 1)
-    const options = numArray.map( num => {
-      return  <option value={num}>{num}</option>
+    const options = numArray.map( (num, index) => {
+      return  <option key={index} value={num}>{num}</option>
     })
     return(
       <div>
         <label htmlFor="quantity">Quantity</label>
-        <select name="quantity">
+        <select name="quantity" onChange={handleChangeQuantity}>
         {options}
         </select>
       </div>
