@@ -19,6 +19,11 @@ function App() {
     setProducts(updatedProducts)
   }
 
+  const getProductFromSlug = (slug) => {
+    slug = slug || null
+    return products.find(p => p.slug === slug)
+  }
+
   return (
     <Router>
       <div id="app">
@@ -40,7 +45,12 @@ function App() {
                 return <AddProduct addProduct={addProduct} history={history} />
               }}
           />
-          <Route path="/product/:slug" component={SingleProduct} />
+          <Route
+            path="/product/:slug"
+            render={({ match }) => {
+              return <SingleProduct product={getProductFromSlug(match.params.slug)} />
+            }}
+          />
           <Route component={NotFoundPage} />
         </Switch>
         </main>
