@@ -8,6 +8,7 @@ import './App.css';
 
 function App() {
   const [products, setProducts] = useState([])
+  const [cart, setCart] = useState([])
 
   const addProduct = product => {
     setProducts([...products, product])
@@ -25,7 +26,23 @@ function App() {
   }
 
   const addToCart = ({ product, quantity }) => {
-    console.log(product, quantity)
+    const index = cart.findIndex(
+      itemInCart => itemInCart.product.slug === product.slug
+    )
+
+    let newCart = []
+
+    if (index === -1) {
+      //not existing
+      newCart = [...cart, { product, quantity }]
+    } else {
+      quantity += cart[index].quantity
+      newCart = cart
+        .filter(item => item.product.slug !== product.slug)
+        .concat({product, quantity})
+    }
+    console.log(newCart);
+    setCart(newCart)
   }
 
   return (
