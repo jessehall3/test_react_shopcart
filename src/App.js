@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import AddProduct from './components/AddProduct.js'
 import Cart from './components/Cart.js'
@@ -11,14 +11,22 @@ function App() {
   const [products, setProducts] = useState([])
   const [cart, setCart] = useState([])
 
+  useEffect(() => {
+    setProducts(JSON.parse(localStorage.getItem('products')) || [])
+    setCart(JSON.parse(localStorage.getItem('cart')) || [])
+  }, [])
+
   const addProduct = product => {
-    setProducts([...products, product])
+    const updatedProducts = [...products, product]
+    setProducts(updatedProducts)
+    localStorage.setItem('products', JSON.stringify(updatedProducts))
   }
 
   const deleteProduct = index => {
     const updatedProducts = [...products]
     updatedProducts.splice(index, 1)
     setProducts(updatedProducts)
+    localStorage.setItem('products', JSON.stringify(updatedProducts))
   }
 
   const getProductFromSlug = (slug) => {
@@ -43,6 +51,7 @@ function App() {
         .concat({product, quantity})
     }
     setCart(newCart)
+    localStorage.setItem('cart', JSON.stringify(newCart))
   }
 
   return (
