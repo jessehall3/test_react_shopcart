@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import AddProduct from './components/AddProduct.js'
+import Cart from './components/Cart.js'
 import ProductsList from './components/ProductsList.js'
 import SingleProduct from './components/SingleProduct.js'
 import NotFoundPage from './components/NotFoundPage.js'
@@ -41,7 +42,6 @@ function App() {
         .filter(item => item.product.slug !== product.slug)
         .concat({product, quantity})
     }
-    console.log(newCart);
     setCart(newCart)
   }
 
@@ -54,6 +54,7 @@ function App() {
         </aside>
 
         <main>
+        <Cart cart={cart}/>
         <Switch>
           <Route exact path="/"
             render={({history}) => {
