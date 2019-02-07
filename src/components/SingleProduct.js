@@ -1,13 +1,16 @@
 import React from 'react';
 
 function SingleProduct(props) {
-  console.log(props.product);
-  return (
-    <div>
-      <h1>Single Product</h1>
-      <h1>{props.product ? props.product.name : "foo"}</h1>
+  const productDiv = (product) => {
+    return <div className="single-product">
+    <img src={product.image} />
+    <h2>{product.name}</h2>
+    <p className="description">{product.description}</p>
+    <p className="price">${product.price}</p>
     </div>
-  )
+  }
+
+  return props.product ? productDiv(props.product) : <p>No Product Found</p>
 }
 
 export default SingleProduct;
