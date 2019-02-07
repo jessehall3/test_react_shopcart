@@ -24,6 +24,10 @@ function App() {
     return products.find(p => p.slug === slug)
   }
 
+  const addToCart = ({ product, quantity }) => {
+    console.log(product, quantity)
+  }
+
   return (
     <Router>
       <div id="app">
@@ -48,7 +52,9 @@ function App() {
           <Route
             path="/product/:slug"
             render={({ match }) => {
-              return <SingleProduct product={getProductFromSlug(match.params.slug)} />
+              return <SingleProduct
+                product={getProductFromSlug(match.params.slug)}
+                addToCart={addToCart}/>
             }}
           />
           <Route component={NotFoundPage} />
